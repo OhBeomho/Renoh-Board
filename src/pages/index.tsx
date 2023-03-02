@@ -38,8 +38,8 @@ export default function (props: PageProps) {
       })
   }, [page])
 
-  const blogListItems = blogs.map((blog, index) => (
-    <BlogListItem key={index}>
+  const blogListItems = blogs.map((blog) => (
+    <BlogListItem key={blog._id}>
       <BlogListItemLink to={`/blog?id=${blog._id}`}>
         <div className="title">{blog.title}</div>
         <div>{blog.writer}</div>
