@@ -8,7 +8,7 @@ export default function (props: { children: ReactNode }) {
       <header>
         <Navbar>
           <Link to="/" className="brand">
-            Renoh Blog
+            Renoh Board
           </Link>
           <div>
             <Link to="/write">글쓰기</Link>
@@ -19,7 +19,7 @@ export default function (props: { children: ReactNode }) {
       <Footer>
         <p>Made by OhBeomho</p>
         <p>
-          Source on <a href="https://github.com/OhBeomho/Renoh-Blog">GitHub</a>
+          Source on <a href="https://github.com/OhBeomho/Renoh-Board">GitHub</a>
         </p>
       </Footer>
     </Wrapper>

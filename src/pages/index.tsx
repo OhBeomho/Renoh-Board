@@ -38,12 +38,12 @@ export default function (props: PageProps) {
       })
   }, [page])
 
-  const blogListItems = posts.map((blog) => (
-    <Post key={blog._id}>
-      <PostLink to={`/post?id=${blog._id}`}>
-        <div className="title">{blog.title}</div>
-        <div>{blog.writer}</div>
-        <div className="date">{new Date(blog.writeDate).toLocaleDateString("ko-KR")}</div>
+  const postListItems = posts.map((post) => (
+    <Post key={post._id}>
+      <PostLink to={`/post?id=${post._id}`}>
+        <div className="title">{post.title}</div>
+        <div>{post.writer}</div>
+        <div className="date">{new Date(post.writeDate).toLocaleDateString("ko-KR")}</div>
       </PostLink>
     </Post>
   ))
@@ -61,7 +61,7 @@ export default function (props: PageProps) {
     <Layout>
       <h1>Renoh Board</h1>
       <hr />
-      {blogListItems.length ? <PostList>{blogListItems}</PostList> : <p>글이 없습니다.</p>}
+      {postListItems.length ? <PostList>{postListItems}</PostList> : <p>글이 없습니다.</p>}
       <p style={{ textAlign: "center" }}>
         <LinkButton to={`/?p=${page - 1}`} disabled={page === 1}>
           이전 페이지

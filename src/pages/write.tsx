@@ -43,7 +43,7 @@ export default function () {
 
       body.append("writeDate", new Date().toLocaleDateString("ko-KR"))
 
-      fetch(`${process.env.GATSBY_API_URL}/blogs`, {
+      fetch(`${process.env.GATSBY_API_URL}/posts`, {
         method: "post",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body
