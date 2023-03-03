@@ -9,7 +9,7 @@ import LinkButton from "../components/LinkButton"
 interface PostData {
   _id: string
   title: string
-  writeDate: string
+  writeDate: number
   writer: string
 }
 

@@ -9,7 +9,7 @@ import "../styles/global.css"
 interface PostData {
   title: string
   writer: string
-  writeDate: string
+  writeDate: number
   content: string
 }
 
@@ -66,7 +66,7 @@ export default function (props: PageProps) {
       <h1>{postData?.title}</h1>
       <Info>
         <div className="writer">{postData?.writer}</div>
-        <div className="date">{new Date(String(postData?.writeDate)).toLocaleDateString("ko-KR")}</div>
+        <div className="date">{new Date(Number(postData?.writeDate)).toLocaleDateString("ko-KR")}</div>
       </Info>
       <hr />
       <Content>{postData?.content}</Content>
