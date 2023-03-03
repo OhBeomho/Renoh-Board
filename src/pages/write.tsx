@@ -1,4 +1,4 @@
-import { navigate } from "gatsby"
+import { HeadFC, navigate } from "gatsby"
 import React, { useCallback } from "react"
 import styled from "styled-components"
 import Button from "../components/Button"
@@ -115,3 +115,5 @@ const Textarea = styled.textarea`
   width: calc(100% - 4px);
   margin: 2px;
 `
+
+export const Head: HeadFC = () => <title>Renoh Board - Write</title>

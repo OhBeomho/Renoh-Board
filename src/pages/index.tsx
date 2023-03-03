@@ -6,7 +6,7 @@ import styled from "styled-components"
 import "../styles/global.css"
 import LinkButton from "../components/LinkButton"
 
-interface BlogData {
+interface PostData {
   _id: string
   title: string
   writeDate: string
@@ -15,20 +15,20 @@ interface BlogData {
 
 export default function (props: PageProps) {
   const page = Number(new URLSearchParams(props.location.search).get("p") || 1)
-  const [blogs, setBlogs] = useState<BlogData[]>([])
+  const [posts, setPosts] = useState<PostData[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
   useEffect(() => {
     setLoading(true)
 
-    fetch(`${process.env.GATSBY_API_URL}/blogs?p=${page}`)
+    fetch(`${process.env.GATSBY_API_URL}/posts?p=${page}`)
       .then((res) => {
         if (res.status === 500) throw new Error("Server error.")
         else if (res.status === 200) return res.json()
       })
       .then((data) => {
-        setBlogs(data)
+        setPosts(data)
         setLoading(false)
       })
       .catch((e) => {
@@ -38,14 +38,14 @@ export default function (props: PageProps) {
       })
   }, [page])
 
-  const blogListItems = blogs.map((blog) => (
-    <BlogListItem key={blog._id}>
-      <BlogListItemLink to={`/blog?id=${blog._id}`}>
+  const blogListItems = posts.map((blog) => (
+    <Post key={blog._id}>
+      <PostLink to={`/post?id=${blog._id}`}>
         <div className="title">{blog.title}</div>
         <div>{blog.writer}</div>
         <div className="date">{new Date(blog.writeDate).toLocaleDateString("ko-KR")}</div>
-      </BlogListItemLink>
-    </BlogListItem>
+      </PostLink>
+    </Post>
   ))
 
   return loading ? (
@@ -54,20 +54,20 @@ export default function (props: PageProps) {
     </Layout>
   ) : error ? (
     <Layout>
-      <h1>Renoh Blog</h1>
-      <p>블로그를 불러오지 못했습니다.</p>
+      <h1>Renoh Board</h1>
+      <p>글을 불러오지 못했습니다.</p>
     </Layout>
   ) : (
     <Layout>
-      <h1>Renoh Blog</h1>
+      <h1>Renoh Board</h1>
       <hr />
-      {blogListItems.length ? <BlogList>{blogListItems}</BlogList> : <p>블로그가 없습니다.</p>}
+      {blogListItems.length ? <PostList>{blogListItems}</PostList> : <p>글이 없습니다.</p>}
       <p style={{ textAlign: "center" }}>
         <LinkButton to={`/?p=${page - 1}`} disabled={page === 1}>
           이전 페이지
         </LinkButton>
         <b>{page}페이지</b>
-        <LinkButton to={`/?p=${page + 1}`} disabled={!blogs.length}>
+        <LinkButton to={`/?p=${page + 1}`} disabled={!posts.length}>
           다음 페이지
         </LinkButton>
       </p>
@@ -75,14 +75,14 @@ export default function (props: PageProps) {
   )
 }
 
-const BlogList = styled.ul`
+const PostList = styled.ul`
   width: 100%;
   list-style: none;
   padding: 0;
   margin: 10px 0;
 `
 
-const BlogListItemLink = styled((props: any) => <Link {...props} />)`
+const PostLink = styled((props: any) => <Link {...props} />)`
   display: flex;
   align-items: center;
   gap: 10px;
@@ -107,9 +107,9 @@ const BlogListItemLink = styled((props: any) => <Link {...props} />)`
   }
 `
 
-const BlogListItem = styled.li`
+const Post = styled.li`
   padding: 0px;
   margin: 8px 0;
 `
 
-export const Head: HeadFC = () => <title>Renoh Blog - Home</title>
+export const Head: HeadFC = () => <title>Renoh Board - Home</title>
